@@ -28,6 +28,7 @@ BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(glew)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(polyclipping)
+BuildRequires:  pkgconfig(egl)
 BuildRequires:  qscintilla-qt5-devel
 BuildRequires:  qt5-devel
 BuildRequires:  mesa-common-devel
