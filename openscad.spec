@@ -30,6 +30,7 @@ BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(polyclipping)
 BuildRequires:  qscintilla-qt5-devel
 BuildRequires:  qt5-devel
+BuildRequires:  mesa-common-devel
 BuildRequires:  x11-server-xvfb
 
 %description
