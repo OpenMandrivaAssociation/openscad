@@ -45,7 +45,7 @@ interested in creating computer-animated movies.
 
 %prep
 %setup -qn %{name}-%{uversion}
-%apply_patches
+%autopatch -p1
 
 # Unbundle polyclipping
 rm -rf src/polyclipping
