@@ -3,7 +3,7 @@
 %define debug_package %nil
 
 Name:           openscad
-Version:        2015.03.2
+Version:        2021.01
 Release:        1
 Summary:        The Programmers Solid 3D CAD Modeller
 # COPYING contains a linking exception for CGAL
@@ -11,27 +11,43 @@ Summary:        The Programmers Solid 3D CAD Modeller
 License:        GPLv2 with exceptions and CC0
 Group:          Graphics
 URL:            http://www.openscad.org/
-Source0:        http://files.openscad.org/%{name}-%{uversion}.src.tar.gz
+Source0:        https://github.com/openscad/openscad/releases/download/%{name}-%{version}/%{name}-%{version}.src.tar.gz
 Patch1:         openscad-polyclipping.patch
 
 BuildRequires:  bison
 BuildRequires:  boost-devel
 BuildRequires:  cgal-devel
 BuildRequires:  cmake
+BuildRequires:  qmake5
 BuildRequires:  flex
-BuildRequires:  gmp-devel
+BuildRequires:  pkgconfig(gmp)
 BuildRequires:  imagemagick
-BuildRequires:  mpfr-devel
+BuildRequires:  pkgconfig(mpfr)
 BuildRequires:  opencsg-devel
+BuildRequires:  cmake(double-conversion)
 BuildRequires:  pkgconfig(eigen3)
 BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(glu)
 BuildRequires:  pkgconfig(glew)
 BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(polyclipping)
 BuildRequires:  pkgconfig(egl)
+#BuildRequires:  pkgconfig(lib3mf)
+BuildRequires:  pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(libzip)
+BuildRequires:  pkgconfig(python3)
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  qscintilla-qt5-devel
-BuildRequires:  qt5-devel
-BuildRequires:  mesa-common-devel
+BuildRequires:  pkgconfig(Qt5Concurrent)
+BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Gamepad)
+BuildRequires:  pkgconfig(Qt5Gui)
+BuildRequires:  pkgconfig(Qt5Multimedia)
+BuildRequires:  pkgconfig(Qt5Network)
+BuildRequires:  pkgconfig(Qt5OpenGL)
+BuildRequires:  pkgconfig(Qt5PrintSupport)
+BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  x11-server-xvfb
 
 %description
@@ -44,11 +60,10 @@ parts but pretty sure is not what you are looking for when you are more
 interested in creating computer-animated movies.
 
 %prep
-%setup -qn %{name}-%{uversion}
-%autopatch -p1
+%autosetup -p1
 
 # Unbundle polyclipping
-rm -rf src/polyclipping
+rm -rf src/ext/polyclipping
 
 %build
 # respect cflags
@@ -68,11 +83,11 @@ sed -i -e 's!/usr/bin/flex!/usr/bin/flex --prefix=lexer!' Makefile
 %make_install INSTALL_ROOT=%{buildroot}
 
 %files
-%doc COPYING README.md RELEASE_NOTES
+%doc COPYING README.md RELEASE_NOTES.md
+%dir %{_datadir}/%{name}
 %{_bindir}/%{name}
-%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/mime/packages/%{name}.xml
-%{_datadir}/pixmaps/%{name}.png
-%{_datadir}/%{name}/
-%{_mandir}/man1/%{name}.1*
+%{_iconsdir}/hicolor/*/apps/*.png
+%{_datadir}/%{name}/*
+%doc %{_mandir}/man1/%{name}.1*
