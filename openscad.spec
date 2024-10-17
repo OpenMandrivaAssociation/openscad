@@ -10,7 +10,7 @@ Summary:        The Programmers Solid 3D CAD Modeller
 # AppData is CC0
 License:        GPLv2 with exceptions and CC0
 Group:          Graphics
-URL:            http://www.openscad.org/
+URL:            https://www.openscad.org/
 Source0:        https://github.com/openscad/openscad/releases/download/%{name}-%{version}/%{name}-%{version}.src.tar.gz
 Patch1:         openscad-polyclipping.patch
 
